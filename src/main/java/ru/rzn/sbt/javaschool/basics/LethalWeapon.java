@@ -1,8 +1,10 @@
 package ru.rzn.sbt.javaschool.basics;
+
 import java.util.Objects;
 public class LethalWeapon {
-    public static long nextSerial=0;
-    public final long serial;
+
+    private static long nextSerial = 0;
+    private long serial;
 
     public long getSerial(){
         return serial;
@@ -15,7 +17,7 @@ public Double getPower(){
   return power;
 }
 
-public void setPower(){
+public void setPower(double power){
     this.power=power;
 }
 
@@ -28,8 +30,8 @@ public void pewPew(){
 }
 
 public LethalWeapon(){
-  serial=nextserial;
-  nextserial++; 
+    serial=nextSerial;
+    nextSerial++;
 }
 
 
@@ -37,9 +39,32 @@ public LethalWeapon(String color,Double power,int roundsLeft ){
     this.color=color;
     this.power=power;
     this.roundsLeft=roundsLeft;
+    serial=nextSerial;
+    nextSerial++;
 
-    serial=nextserial;
-    nextserial++; 
+}
+
+@Override
+    public boolean equals(Object obj){
+      if (obj==this) {
+          return true;}
+      if (obj==null){
+          return false;
+      }
+      if (this.getClass() != obj.getClass()) {
+          return false;
+      }
+
+      LethalWeapon k= (LethalWeapon) obj;
+
+      return power==k.power && roundsLeft==k.roundsLeft &&
+              (color==k.color || color != null || color.equals(k.color));
+
+
+}
+@Override
+    public int hashCode(){
+     return Objects.hash(power,roundsLeft,color);
 }
 
 }
