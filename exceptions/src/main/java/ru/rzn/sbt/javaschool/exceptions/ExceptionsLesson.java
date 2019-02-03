@@ -293,6 +293,7 @@ return data;
         return data;
     }
 
+
     /**
      * Упражнение 12. Hello Barbara.<br />
      * <br />
