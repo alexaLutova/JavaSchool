@@ -18,9 +18,11 @@ public class ExceptionsLesson {
      * методом {@link Logger#log(String)}.
      */
     public void logException(SomeService service, Logger log) {
-        try{service.doSomething();}
-        catch (IOException e )
-        {log.log(e.getMessage());}
+        try{
+            service.doSomething();
+        } catch (IOException e ) {
+            log.log(e.getMessage());
+        }
 
     }
 
@@ -35,10 +37,11 @@ public class ExceptionsLesson {
      * методом {@link SomeService#closeConnection()}
      */
     public void closeConnection(SomeService service, Logger log) {
-        try{service.doSomething();}
-        catch (IOException e )
-        {log.log(e.getMessage());}
-        finally {
+        try{
+            service.doSomething();
+        } catch (IOException e ) {
+            log.log(e.getMessage());
+        } finally {
             service.closeConnection();
         }
 
@@ -53,8 +56,9 @@ public class ExceptionsLesson {
      * Изучите распечатаный стек вызовов в логе вывода тестов.
      */
     public void getStackTrace(SomeService service, Logger log) {
-        try{getStackTraceDeeper(service);}
-        catch(Exception e){
+        try{
+            getStackTraceDeeper(service);
+        } catch(Exception e){
             for (StackTraceElement i:e.getStackTrace()){
                 log.log(i.toString());
             }
@@ -88,7 +92,8 @@ public class ExceptionsLesson {
      * исключения не предназначены для описания стандартного поведения программы!
      */
     public void showMeTheWay(SomeService service, Logger log){
-        try{service.showMeTheWay();
+        try{
+            service.showMeTheWay();
         }catch (BoyException e){
             log.log(RIGHT);
         }
@@ -141,12 +146,13 @@ public class ExceptionsLesson {
     public class HelloWorldException extends Exception{
         public int ErrorCode;
         public String message;
-  public int getErrorCode(){
-      return ErrorCode;}
+        public int getErrorCode(){
+            return ErrorCode;}
         public  HelloWorldException(String message,int ErrorCode){
             super(message);
             this.ErrorCode=ErrorCode;
-        }}
+        }
+    }
     public void helloWorldException() throws HelloWorldException {
         throw new HelloWorldException(THROW_THE_WORLD_MSG,THROW_THE_WORLD_CODE);
 
@@ -164,7 +170,8 @@ public class ExceptionsLesson {
      */
     public String callMe() {
         String caller = null;
-
+        Exception e = new Exception("111");
+        caller = e.getStackTrace()[1].getMethodName();
         return caller;
     }
 
@@ -244,20 +251,21 @@ public class ExceptionsLesson {
         con=cf.createConnection();
        ses=con.createSession();
 
-            data=ses.getData();}
-            catch(IOException e){
+            data=ses.getData();
+        } catch(IOException e){
             log.log(e.getMessage());
-            }
-            finally{
+        } finally{
                 if (ses!=null){
-                    try{ses.close();}
-                    catch(IOException e){
+                    try{
+                        ses.close();
+                    } catch(IOException e){
                         log.log(e.getMessage());
                     }
                 }
                 if (con!=null){
-                    try{con.close();}
-                    catch(IOException e){
+                    try{
+                        con.close();
+                    } catch(IOException e){
                         log.log(e.getMessage());
                     }
                 }
