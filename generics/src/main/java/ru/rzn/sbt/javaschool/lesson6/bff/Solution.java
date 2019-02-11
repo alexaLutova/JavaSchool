@@ -24,9 +24,7 @@ public class Solution {
                 if (j==null) continue;
                 if (j==i) continue;
                 Person BestFriend_j=j.getBestFriend();
-//                if (Objects.equals(BestFriend_i,j) && Objects.equals(BestFriend_j,i)) {
-//                    set.add(new TwoItems<>(i,j));
-//                }
+
                 if ((BestFriend_i==j) && (BestFriend_j==i)) {
 
                     set.add(new TwoItems<>(i,j));
